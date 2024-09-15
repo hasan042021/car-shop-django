@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block content %}
+{% load static %}
+<div
+  style="height: 70vh; background: #01200"
+  class="d-flex align-items-center justify-content-around gap-5 container"
+>
+  <div>
+    <h1 class="display-4 text-start">
+        <b><i>To be your trusted partner for all your needs.</i></b>
+    </h1>
+    <h5 class="lead ">Emphasizing Quality and Service.</h5>
+    <h5 class="lead">Offering Special Deals or Promotions.</hp>
+    <h5 class="lead">Focusing on Specific Services.</h5>
+  </div>
+  <img
+    src="{% static 'banner.jpg'%}"
+    alt="header-img"
+    class="w-50 d-block rounded"
+  />
+</div>
+<div class=" my-3 d-flex justify-content-center align-items-center">
+    {% for b in brands  %}
+        <a href="{% url 'filter_by_brand' b.slug %}" class="{% if b.brand_name == filter %} btn btn-warning mx-3 {% else %} btn btn-outline-warning text-dark mx-3{% endif %}"  href="">{{b.brand_name}}</a>   
+    {% endfor %}
+</div>
+{% if data|length == 0 %}
+    <div style="height: 50vh;" class="d-flex align-items-center justify-content-center">
+        <h1>No Data Found</h1>
+    </div> 
+    {% endif %} 
+<div class="row row-cols-3 m-4  g-4">
+    
+    
+    {% for i in data  %}
+    <div class="col">
+        <div class="card">
+            <img src="{{i.image.url}}" class="card-img-top"  alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{i.car_name}}</h5>
+                <h6 class="card-title">Price: ${{i.price}}</h6>
+                <p class="card-text">{{i.description|truncatewords:10}}</p>
+                <a class="btn btn-dark" href="{% url 'car_details' i.id %}">See Details</a>
+          </div>
+        </div>
+    </div>
+    {% endfor %}    
+</div>
+{% endblock content %}
