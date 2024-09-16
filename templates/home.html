@@ -23,11 +23,9 @@
         <a href="{% url 'filter_by_brand' b.slug %}" class="{% if b.brand_name == filter %} btn btn-warning mx-3 {% else %} btn btn-outline-warning text-dark mx-3{% endif %}"  href="">{{b.brand_name}}</a>   
     {% endfor %}
 </div>
-{% if data|length == 0 %}
-    <div style="height: 50vh;" class="d-flex align-items-center justify-content-center">
-        <h1>No Data Found</h1>
-    </div> 
-    {% endif %} 
+<div class="mx-5">
+    <h1 class="btn btn-dark"> Total Car Found: {{data|length}} </h1>
+</div> 
 <div class="row row-cols-3 m-4  g-4">
     
     
