@@ -16,21 +16,23 @@
       </div>
     </div>
 </div>
-<div class="container my-5">
-    <h4>My Total Orders {{orders|length}}</h4>
+<h4 class="mx-5">My Total Orders {{orders|length}}</h4>
+<div class="container row row-cols-3 m-4  g-4 my-1">
+    
     {% for i in orders  %}
-    <div class="card my-3" style=" margin:auto">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="{{i.car.image.url}}"  class="img-fluid rounded w-50" alt="...">
-          </div>
-          <div class="col-md-8 d-flex flex-column align-items-start justify-content-center">
+    <div class="col">
+      <div class="card">
+          <img src="{{i.car.image.url}}" class="card-img-top"  alt="...">
+          <div class="card-body">
               <h6 class="card-text m-0 p-0">Order Id: {{i.id}}</h6>
-              <p class="card-title m-0 p-0"> {{i.car.car_name}} </p>
-              <p class="card-title m-0 p-0">Ordered At: {{i.created_at}}</p>
-          </div>
+              <h5 class="card-title">{{i.car.car_name}}</h5>
+              <h6 class="card-title">Price: ${{i.car.price}}</h6>
+              <p class="card-text">{{i.car.description|truncatewords:10}}</p>
+              <p class="card-title mb-2 p-0">Ordered At: {{i.created_at}}</p>
+              <a class="btn btn-dark" href="{% url 'car_details' i.car.id %}">See Details</a>
         </div>
-    </div>
+      </div>
     {% endfor %}
 </div>
 {% endblock content %}
+
